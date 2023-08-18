@@ -1,5 +1,5 @@
 {
-    "name": "deduhm/php-project-45",
+    "name": "hexlet/code",
     "autoload": {
         "psr-4": {
             "Deduhm\\PhpProject45\\": "src/"
