@@ -5,7 +5,10 @@
     "autoload": {
         "psr-4": {
             "Deduhm\\PhpProject45\\": "src/"
-        }
+        },
+        "files": [
+            "src/Cli.php"
+        ]
     },
     "authors": [
         {
