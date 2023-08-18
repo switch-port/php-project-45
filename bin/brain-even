@@ -1,56 +1,11 @@
 #! /usr/bin/env php
 <?php
 
-namespace BrainGames\bin;
+namespace BrainGames\Bin\Even;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use function BrainGames\Cli\printLine;
-use function BrainGames\Cli\getPrompt;
+use function BrainGames\Games\Even\startGameBrainEven;
 
-$countCorrectAnswers = 0;
-$winCode = true;
+startGameBrainEven();
 
-printLine("Welcome to the Brain Games!");
-$userName = getPrompt("May I have your name? ");
-printLine("Hello, {$userName}!");
-printLine('Answer "yes" if the number is even, otherwise answer "no".');
-
-while ($countCorrectAnswers < 3) {
-    try {
-        $randomNumber = random_int(PHP_INT_MIN, PHP_INT_MAX);
-    } catch (\Exception $e) {
-    }
-
-    printLine("Question: {$randomNumber}");
-
-    if (isEven($randomNumber)) {
-        $correctAnswer = "yes";
-    } else {
-        $correctAnswer = "no";
-    }
-
-    $yourAnswer = getPrompt("Your answer: ");
-
-    if ($yourAnswer == $correctAnswer) {
-        printLine("Correct!");
-        $countCorrectAnswers++;
-    } else {
-        printLine("'{$yourAnswer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.");
-        printLine("Let's try again, {$userName}!");
-        $winCode = false;
-        break;
-    }
-}
-
-if ($winCode) {
-    printLine("Congratulations, {$userName}!");
-}
-
-function isEven(int $number): bool
-{
-    if ($number%2 == 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
