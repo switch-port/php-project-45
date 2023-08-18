@@ -1,0 +1,15 @@
+{
+    "name": "deduhm/php-project-45",
+    "autoload": {
+        "psr-4": {
+            "Deduhm\\PhpProject45\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "deduhm",
+            "email": "shim.master3490@gmail.com"
+        }
+    ],
+    "require": {}
+}
