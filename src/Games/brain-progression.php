@@ -13,8 +13,8 @@ function startGameBrainProgression(): void
 
     while ($countCorrectAnswers < 3) {
         try {
-            $randomStartNumber = random_int(Engine::MIN_INT, 10);
-            $randomNumberDifferenceNumber = random_int(Engine::MIN_INT, 4);
+            $randomStartNumber = random_int(Engine::MIN_INT, Engine::MAX_INT);
+            $randomNumberDifferenceNumber = random_int(Engine::MIN_INT, Engine::MAX_INT);
         } catch (\Exception $e) {
         }
 
