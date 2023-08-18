@@ -12,5 +12,5 @@ function printLine(string $str): void
 
 function getPrompt(string $str): string
 {
-    return prompt($str);
+    return prompt($str, false, null);
 }

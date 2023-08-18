@@ -1,10 +1,12 @@
 #! /usr/bin/env php
 <?php
+
+namespace BrainGames\bin;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use function BrainGames\Cli\printLine;
 use function BrainGames\Cli\getPrompt;
 
 printLine("Welcome to the Brain Games!");
-$name = getPrompt("May I have your name?");
-printLine("Hello, {$name}");
+$name = getPrompt("May I have your name? ");
+printLine("Hello, {$name}!");
