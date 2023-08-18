@@ -1,5 +1,7 @@
 {
     "name": "hexlet/code",
+    "description": "First hexlet project Brain-games",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Deduhm\\PhpProject45\\": "src/"
@@ -11,5 +13,8 @@
             "email": "shim.master3490@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "bin": [
+        "bin/brain-games"
+    ]
 }
