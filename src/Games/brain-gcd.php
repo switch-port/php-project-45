@@ -1,16 +1,15 @@
 <?php
 
-namespace BrainGames\Games\Calc;
+namespace BrainGames\Games\Gcd;
 
 use BrainGames\Engine\Engine;
 
-function startGameBrainCalc(): void
+function startGameBrainGcd(): void
 {
     $countCorrectAnswers = 0;
     $winCode = true;
-    $arrayOfSigns = ["+","-","*"];
 
-    $engine = new Engine('What is the result of the expression?');
+    $engine = new Engine('Find the greatest common divisor of given numbers.');
 
     while ($countCorrectAnswers < 3) {
         try {
@@ -19,11 +18,10 @@ function startGameBrainCalc(): void
         } catch (\Exception $e) {
         }
 
-        $randomSign = array_rand($arrayOfSigns);
 
-        $engine->printQuestion("{$randomNumberOne} {$arrayOfSigns[$randomSign]} {$randomNumberTwo}");
+        $engine->printQuestion("{$randomNumberOne} {$randomNumberTwo}");
 
-        $correctAnswer = mathResult($randomNumberOne, $arrayOfSigns[$randomSign], $randomNumberTwo);
+        $correctAnswer = gmp_strval(gmp_gcd($randomNumberOne, $randomNumberTwo));
 
         $engine->setUserAnswer();
 
@@ -40,13 +38,4 @@ function startGameBrainCalc(): void
     if ($winCode) {
         $engine->winGame();
     }
-}
-
-function mathResult(int $numOne, string $sign, int $numTwo): int
-{
-    return match ($sign) {
-        "+" => $numOne + $numTwo,
-        "-" => $numOne - $numTwo,
-        "*" => $numOne * $numTwo,
-    };
 }

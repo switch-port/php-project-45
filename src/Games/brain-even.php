@@ -1,7 +1,6 @@
 <?php
 
 namespace BrainGames\Games\Even;
-require_once __DIR__ . '/../../vendor/autoload.php';
 
 use BrainGames\Engine\Engine;
 
@@ -45,7 +44,7 @@ function startGameBrainEven(): void
 
 function isEven(int $number): bool
 {
-    if ($number%2 == 0) {
+    if ($number % 2 == 0) {
         return true;
     } else {
         return false;

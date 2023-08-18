@@ -10,8 +10,8 @@ class Engine
     private string $userName;
     private string $userAnswer;
 
-    const MIN_INT = 1;
-    const MAX_INT = 99;
+    public const MIN_INT = 1;
+    public const MAX_INT = 99;
 
     public function __construct(string $themeOfGame)
     {

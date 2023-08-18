@@ -6,6 +6,9 @@ install:
 validate:
 	composer validate
 
+autoload:
+	composer dump-autoload
+
 lint:
 	composer exec --verbose phpcs -- --standard=PSR12 src bin
 
@@ -17,3 +20,6 @@ brain-even:
 
 brain-calc:
 	./bin/brain-calc
+
+brain-gcd:
+	./bin/brain-gcd
