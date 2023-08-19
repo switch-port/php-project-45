@@ -7,11 +7,11 @@ use function BrainGames\Cli\printLine;
 
 const MIN_INT = 1;
 const MAX_INT = 99;
+$userName = "";
 
 function startGame(string $nameOfGame, string $themeOfGame): void
 {
     $countCorrectAnswers = 0;
-    $winCode = true;
 
     printLine("Welcome to the Brain Games!");
     $userName = getPrompt("May I have your name? ");
@@ -29,32 +29,23 @@ function startGame(string $nameOfGame, string $themeOfGame): void
         } else {
             printLine("'$userAnswer' is wrong answer ;(. Correct answer was '$correctAnswer'.");
             printLine("Let's try again, $userName!");
-            $winCode = false;
             break;
         }
     }
 
-    if ($winCode) {
-        printLine("Congratulations, $userName!");
-    }
+    congratulation($userName, true);
 }
 
 function getCorrectAnswer(string $nameOfGame): string
 {
-    if ($nameOfGame == "brain-even") {
-        $correctAnswer = brainEven();
-    } elseif ($nameOfGame == "brain-calc") {
-        $correctAnswer = brainCalc();
-    } elseif ($nameOfGame == "brain-gcd") {
-        $correctAnswer = brainGcd();
-    } elseif ($nameOfGame == "brain-progression") {
-        $correctAnswer = brainProgression();
-    } elseif ($nameOfGame == "brain-prime") {
-        $correctAnswer = brainPrime();
-    } else {
-        $correctAnswer = "";
-    }
-    return $correctAnswer;
+    return match ($nameOfGame) {
+        "brain-even" => brainEven(),
+        "brain-calc" => brainCalc(),
+        "brain-gcd" => brainGcd(),
+        "brain-progression" => brainProgression(),
+        "brain-prime" => brainPrime(),
+        default => ""
+    };
 }
 
 function brainEven(): string
@@ -180,50 +171,9 @@ function isPrimeNumber(int $number): bool
     return true;
 }
 
-//
-//namespace BrainGames\Engine;
-//
-//use function BrainGames\Cli\getPrompt;
-//use function BrainGames\Cli\printLine;
-//
-//const MIN_INT = 1;
-//const MAX_INT = 99;
-//const CONGRATULATION_STRING = "Congratulations";
-//
-//function startGame(string $themeOfGame, array $randomValues): void
-//{
-//    $countCorrectAnswers = 0;
-//    $winCode = true;
-//
-//    printLine("Welcome to the Brain Games!");
-//    $userName = getPrompt("May I have your name? ");
-//    printLine("Hello, {$userName}!");
-//    printLine($themeOfGame);
-//
-//    while ($countCorrectAnswers < 3) {
-//        $randomNumber = random_int(Engine::MIN_INT, Engine::MAX_INT);
-//
-//        $question = "";
-//
-//        printLine("Question: {$question}");
-//
-//        $userAnswer = getPrompt("Your answer: ");
-//
-//        $correctAnswer = "";
-//
-//        if ($userAnswer == $correctAnswer) {
-//            printLine("Correct!");
-//            $countCorrectAnswers++;
-//        } else {
-//            printLine("'{$userAnswer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.");
-//            printLine("Let's try again, {$userName}!");
-//            $winCode = false;
-//            break;
-//        }
-//    }
-//
-//
-//    if ($winCode) {
-//        printLine("Congratulations, {$userName}!");
-//    }
-//}
+function congratulation(string $userName, bool $winCode): void
+{
+    if ($winCode) {
+        printLine("Congratulations, $userName!");
+    }
+}
