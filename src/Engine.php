@@ -16,73 +16,105 @@ function startGame(string $nameOfGame, string $themeOfGame): void
 
     printLine("Welcome to the Brain Games!");
     $userName = getPrompt("May I have your name? ");
-    printLine("Hello, {$userName}!");
+    printLine("Hello, $userName!");
     printLine($themeOfGame);
 
     while ($countCorrectAnswers < 3) {
-        $randomNumberOne = getRandomNumber();
-        $randomNumberTwo = getRandomNumber();
-
         if ($nameOfGame == "brain-even") {
             // BRAIN_EVEN GAME
-            printLine("Question: {$randomNumberOne}");
-
-            if (isEven($randomNumberOne)) {
-                $correctAnswer = "yes";
-            } else {
-                $correctAnswer = "no";
-            }
+            $correctAnswer = brainEven();
         } elseif ($nameOfGame == "brain-calc") {
             // BRAIN_CALC GAME
-            $arrayOfSigns = ["+","-","*"];
-            $randomSign = array_rand($arrayOfSigns);
-
-            printLine("Question: {$randomNumberOne} {$arrayOfSigns[$randomSign]} {$randomNumberTwo}");
-
-            $correctAnswer = mathResult($randomNumberOne, $arrayOfSigns[$randomSign], $randomNumberTwo);
+            $correctAnswer = brainCalc();
         } elseif ($nameOfGame == "brain-gcd") {
             // BRAIN_GCD GAME
-            printLine("Question: {$randomNumberOne} {$randomNumberTwo}");
-
-            $correctAnswer = findGcd($randomNumberOne, $randomNumberTwo);
+            $correctAnswer = brainGcd();
         } elseif ($nameOfGame == "brain-progression") {
             // BRAIN_PROGRESSION GAME
-            $arithmeticProgression = setArithmeticProgression($randomNumberOne, $randomNumberTwo);
-            $randomElementOfAP = array_rand($arithmeticProgression);
-            $correctAnswer = $arithmeticProgression[$randomElementOfAP];
-            $arithmeticProgression[$randomElementOfAP] = "..";
-
-            printLine("Question: " . implode(" ", $arithmeticProgression));
+            $correctAnswer = brainProgression();
         } elseif ($nameOfGame == "brain-prime") {
             // BRAIN_PRIME GAME
-            printLine("Question: {$randomNumberOne}");
-
-            if (isPrimeNumber($randomNumberOne)) {
-                $correctAnswer = "yes";
-            } else {
-                $correctAnswer = "no";
-            }
+            $correctAnswer = brainPrime();
         }
 
-        // получение ответа
         $userAnswer = getPrompt("Your answer: ");
 
-        // определение верности ответа
         if ($userAnswer == $correctAnswer) {
             printLine("Correct!");
             $countCorrectAnswers++;
         } else {
-            printLine("'{$userAnswer}' is wrong answer ;(. Correct answer was '{$correctAnswer}'.");
-            printLine("Let's try again, {$userName}!");
+            printLine("'$userAnswer' is wrong answer ;(. Correct answer was '$correctAnswer'.");
+            printLine("Let's try again, $userName!");
             $winCode = false;
             break;
         }
     }
 
     if ($winCode) {
-        printLine("Congratulations, {$userName}!");
+        printLine("Congratulations, $userName!");
     }
 }
+
+function brainEven(): string
+{
+    $randomNumber = getRandomNumber();
+    printLine("Question: $randomNumber");
+
+    if (isEven($randomNumber)) {
+        return "yes";
+    } else {
+        return "no";
+    }
+}
+
+function brainCalc(): string
+{
+    $randomNumberOne = getRandomNumber();
+    $randomNumberTwo = getRandomNumber();
+    $arrayOfSigns = ["+","-","*"];
+    $randomSign = array_rand($arrayOfSigns);
+
+    printLine("Question: $randomNumberOne $arrayOfSigns[$randomSign] $randomNumberTwo");
+
+    return mathResult($randomNumberOne, $arrayOfSigns[$randomSign], $randomNumberTwo);
+}
+
+function brainGcd(): string
+{
+    $randomStartNumber = getRandomNumber();
+    $randomDifferenceNumber = getRandomNumber();
+    printLine("Question: $randomStartNumber $randomDifferenceNumber");
+
+    return findGcd($randomStartNumber, $randomDifferenceNumber);
+}
+
+function brainProgression(): string
+{
+    $randomNumberOne = getRandomNumber();
+    $randomNumberTwo = getRandomNumber();
+    $arithmeticProgression = setArithmeticProgression($randomNumberOne, $randomNumberTwo);
+    $randomElementOfAP = array_rand($arithmeticProgression);
+    $correctAnswer = $arithmeticProgression[$randomElementOfAP];
+    $arithmeticProgression[$randomElementOfAP] = "..";
+
+    printLine("Question: " . implode(" ", $arithmeticProgression));
+
+    return $correctAnswer;
+}
+
+function brainPrime(): string
+{
+    $randomNumber = getRandomNumber();
+    printLine("Question: $randomNumber");
+
+    if (isPrimeNumber($randomNumber)) {
+        return "yes";
+    } else {
+        return "no";
+    }
+}
+
+
 
 function getRandomNumber(): int
 {
