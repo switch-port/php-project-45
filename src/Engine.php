@@ -11,7 +11,6 @@ const MAX_INT = 99;
 function startGame(string $nameOfGame, string $themeOfGame): void
 {
     $countCorrectAnswers = 0;
-    $correctAnswer = "";
     $winCode = true;
 
     printLine("Welcome to the Brain Games!");
@@ -43,17 +42,19 @@ function startGame(string $nameOfGame, string $themeOfGame): void
 function getCorrectAnswer(string $nameOfGame): string
 {
     if ($nameOfGame == "brain-even") {
-        return brainEven();
+        $correctAnswer = brainEven();
     } elseif ($nameOfGame == "brain-calc") {
-        return brainCalc();
+        $correctAnswer = brainCalc();
     } elseif ($nameOfGame == "brain-gcd") {
-        return brainGcd();
+        $correctAnswer = brainGcd();
     } elseif ($nameOfGame == "brain-progression") {
-        return brainProgression();
+        $correctAnswer = brainProgression();
     } elseif ($nameOfGame == "brain-prime") {
-        return brainPrime();
+        $correctAnswer = brainPrime();
+    } else {
+        $correctAnswer = "";
     }
-    return "";
+    return $correctAnswer;
 }
 
 function brainEven(): string
