@@ -20,22 +20,7 @@ function startGame(string $nameOfGame, string $themeOfGame): void
     printLine($themeOfGame);
 
     while ($countCorrectAnswers < 3) {
-        if ($nameOfGame == "brain-even") {
-            // BRAIN_EVEN GAME
-            $correctAnswer = brainEven();
-        } elseif ($nameOfGame == "brain-calc") {
-            // BRAIN_CALC GAME
-            $correctAnswer = brainCalc();
-        } elseif ($nameOfGame == "brain-gcd") {
-            // BRAIN_GCD GAME
-            $correctAnswer = brainGcd();
-        } elseif ($nameOfGame == "brain-progression") {
-            // BRAIN_PROGRESSION GAME
-            $correctAnswer = brainProgression();
-        } elseif ($nameOfGame == "brain-prime") {
-            // BRAIN_PRIME GAME
-            $correctAnswer = brainPrime();
-        }
+        $correctAnswer = getCorrectAnswer($nameOfGame);
 
         $userAnswer = getPrompt("Your answer: ");
 
@@ -53,6 +38,22 @@ function startGame(string $nameOfGame, string $themeOfGame): void
     if ($winCode) {
         printLine("Congratulations, $userName!");
     }
+}
+
+function getCorrectAnswer(string $nameOfGame): string
+{
+    if ($nameOfGame == "brain-even") {
+        return brainEven();
+    } elseif ($nameOfGame == "brain-calc") {
+        return brainCalc();
+    } elseif ($nameOfGame == "brain-gcd") {
+        return brainGcd();
+    } elseif ($nameOfGame == "brain-progression") {
+        return brainProgression();
+    } elseif ($nameOfGame == "brain-prime") {
+        return brainPrime();
+    }
+    return "";
 }
 
 function brainEven(): string
@@ -113,8 +114,6 @@ function brainPrime(): string
         return "no";
     }
 }
-
-
 
 function getRandomNumber(): int
 {
