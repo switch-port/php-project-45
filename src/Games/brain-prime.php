@@ -9,7 +9,7 @@ function startGameBrainPrime(): void
     $countCorrectAnswers = 0;
     $winCode = true;
 
-    $engine = new Engine('"yes" if given number is prime. Otherwise answer "no".');
+    $engine = new Engine('Answer "yes" if given number is prime. Otherwise answer "no".');
 
     while ($countCorrectAnswers < 3) {
         try {
