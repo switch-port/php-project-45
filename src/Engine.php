@@ -7,7 +7,6 @@ use function BrainGames\Cli\printLine;
 
 const MIN_INT = 1;
 const MAX_INT = 99;
-const CONGRATULATION_STRING = "Congratulations";
 
 function startGame(string $nameOfGame, string $themeOfGame): void
 {
@@ -21,8 +20,8 @@ function startGame(string $nameOfGame, string $themeOfGame): void
     printLine($themeOfGame);
 
     while ($countCorrectAnswers < 3) {
-        // BRAIN_EVEN GAME
         if ($nameOfGame == "brain-even") {
+            // BRAIN_EVEN GAME
             try {
                 $randomNumber = random_int(MIN_INT, MAX_INT);
             } catch (\Exception $e) {
@@ -35,8 +34,8 @@ function startGame(string $nameOfGame, string $themeOfGame): void
             } else {
                 $correctAnswer = "no";
             }
-            // BRAIN_CALC GAME
         } elseif ($nameOfGame == "brain-calc") {
+            // BRAIN_CALC GAME
             try {
                 $randomNumberOne = random_int(MIN_INT, MAX_INT);
                 $randomNumberTwo = random_int(MIN_INT, MAX_INT);
@@ -48,8 +47,8 @@ function startGame(string $nameOfGame, string $themeOfGame): void
             printLine("Question: {$randomNumberOne} {$arrayOfSigns[$randomSign]} {$randomNumberTwo}");
 
             $correctAnswer = mathResult($randomNumberOne, $arrayOfSigns[$randomSign], $randomNumberTwo);
-            // BRAIN_GCD GAME
         } elseif ($nameOfGame == "brain-gcd") {
+            // BRAIN_GCD GAME
             try {
                 $randomNumberOne = random_int(MIN_INT, MAX_INT);
                 $randomNumberTwo = random_int(MIN_INT, MAX_INT);
@@ -59,8 +58,8 @@ function startGame(string $nameOfGame, string $themeOfGame): void
             printLine("Question: {$randomNumberOne} {$randomNumberTwo}");
 
             $correctAnswer = findGcd($randomNumberOne, $randomNumberTwo);
-            // BRAIN_PROGRESSION GAME
         } elseif ($nameOfGame == "brain-progression") {
+            // BRAIN_PROGRESSION GAME
             try {
                 $randomStartNumber = random_int(MIN_INT, MAX_INT);
                 $randomNumberDifferenceNumber = random_int(MIN_INT, MAX_INT);
@@ -72,9 +71,9 @@ function startGame(string $nameOfGame, string $themeOfGame): void
             $correctAnswer = $arithmeticProgression[$randomElementOfAP];
             $arithmeticProgression[$randomElementOfAP] = "..";
 
-            printLine("Question: ".implode(" ", $arithmeticProgression));
-            // BRAIN_PRIME GAME
+            printLine("Question: " . implode(" ", $arithmeticProgression));
         } elseif ($nameOfGame == "brain-prime") {
+            // BRAIN_PRIME GAME
             try {
                 $randomNumber = random_int(MIN_INT, MAX_INT);
             } catch (\Exception $e) {
@@ -138,7 +137,19 @@ function setArithmeticProgression(int $startNumber, int $progressionDifference):
 
 function findGcd(int $numberOne, int $numberTwo): int
 {
-    return gmp_strval(gmp_gcd($numberOne, $numberTwo));
+    if ($numberOne == 0) {
+        return $numberTwo;
+    }
+
+    while ($numberTwo != 0) {
+        if ($numberOne > $numberTwo) {
+            $numberOne -= $numberTwo;
+        } else {
+            $numberTwo -= $numberOne;
+        }
+    }
+
+    return $numberOne;
 }
 
 function isPrimeNumber(int $number): bool
