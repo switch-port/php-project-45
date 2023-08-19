@@ -44,15 +44,14 @@ function startGameBrainPrime(): void
 
 function isPrimeNumber(int $number): bool
 {
-    $count = 0;
-    for ($i = 1; $i <= $number; $i++) {
-        if ($number % $i == 0) {
-            $count++;
-        }
-    }
-    if ($count == 2) {
-        return true;
-    } else {
+    if ($number < 2) {
         return false;
     }
+
+    for ($i = 2; $i < $number / 2; $i++) {
+        if ($number % $i == 0) {
+            return false;
+        }
+    }
+    return true;
 }
