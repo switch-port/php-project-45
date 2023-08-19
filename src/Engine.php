@@ -7,7 +7,6 @@ use function BrainGames\Cli\printLine;
 
 const MIN_INT = 1;
 const MAX_INT = 99;
-$userName = "";
 
 function startGame(string $nameOfGame, string $themeOfGame): void
 {
