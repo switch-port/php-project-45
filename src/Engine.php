@@ -95,6 +95,7 @@ function mathResult(int $numOne, string $sign, int $numTwo): string
         "+" => $numOne + $numTwo,
         "-" => $numOne - $numTwo,
         "*" => $numOne * $numTwo,
+        default => ""
     };
 }
 
