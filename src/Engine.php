@@ -42,7 +42,6 @@ function startGame(string $nameOfGame, string $themeOfGame): void
             $correctAnswer = mathResult($randomNumberOne, $arrayOfSigns[$randomSign], $randomNumberTwo);
         } elseif ($nameOfGame == "brain-gcd") {
             // BRAIN_GCD GAME
-
             printLine("Question: {$randomNumberOne} {$randomNumberTwo}");
 
             $correctAnswer = findGcd($randomNumberOne, $randomNumberTwo);
@@ -90,7 +89,7 @@ function getRandomNumber(): int
     return rand(MIN_INT, MAX_INT);
 }
 
-function mathResult(int $numOne, string $sign, int $numTwo): int
+function mathResult(int $numOne, string $sign, int $numTwo): string
 {
     return match ($sign) {
         "+" => $numOne + $numTwo,
