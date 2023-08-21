@@ -39,7 +39,7 @@ function startGame(string $nameOfGame, string $themeOfGame): void
     }
 
     if (!$winCode) {
-        printEndGameMessage($userName,false);
+        printEndGameMessage($userName, false);
     } else {
         printEndGameMessage($userName);
     }
