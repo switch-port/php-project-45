@@ -38,11 +38,7 @@ function startGame(string $nameOfGame, string $themeOfGame): void
         }
     }
 
-    if (!$winCode) {
-        printEndGameMessage($userName, false);
-    } else {
-        printEndGameMessage($userName);
-    }
+    printEndGameMessage($userName, $winCode);
 }
 
 function getCorrectAnswer(string $nameOfGame): string
@@ -62,7 +58,7 @@ function getRandomNumber(): int
     return rand(MIN_NUMBER, MAX_NUMBER);
 }
 
-function printEndGameMessage(string $userName, bool $winCode = true): void
+function printEndGameMessage(string $userName, bool $winCode): void
 {
     if ($winCode) {
         printLine("Congratulations, $userName!");
