@@ -2,22 +2,32 @@
 
 namespace BrainGames\Games\Gcd;
 
-use function BrainGames\Cli\printLine;
-use function BrainGames\Engine\getRandomNumber;
 use function BrainGames\Engine\startGame;
+use function BrainGames\Engine\getRandomNumber;
+
+use const BrainGames\Engine\NUMBER_OF_GAME_ROUNDS;
 
 function startGameBrainGcd(): void
 {
-    startGame("brain-gcd", 'Find the greatest common divisor of given numbers.');
+    $themeOfGame = 'Find the greatest common divisor of given numbers.';
+    $questionsAnswers = getQuestionsAnswers();
+    startGame($themeOfGame, $questionsAnswers);
 }
 
-function getCorrectAnswerBrainGcd(): string
+function getQuestionsAnswers(): array
 {
-    $randomStartNumber = getRandomNumber();
-    $randomDifferenceNumber = getRandomNumber();
-    printLine("Question: $randomStartNumber $randomDifferenceNumber");
+    $answersArray = [];
+    for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
+        $randomStartNumbers[] = getRandomNumber();
+        $randomDifferenceNumbers[] = getRandomNumber();
+        $correctAnswer = findGcd($randomStartNumbers[$i], $randomDifferenceNumbers[$i]);
+        $answersArray[] = [
+            "Question" => "Question: $randomStartNumbers[$i] $randomDifferenceNumbers[$i]",
+            "Correct answer" => $correctAnswer
+        ];
+    }
 
-    return findGcd($randomStartNumber, $randomDifferenceNumber);
+    return $answersArray;
 }
 
 function findGcd(int $numberOne, int $numberTwo): int

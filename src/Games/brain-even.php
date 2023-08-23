@@ -2,32 +2,34 @@
 
 namespace BrainGames\Games\Even;
 
-use function BrainGames\Cli\printLine;
 use function BrainGames\Engine\startGame;
 use function BrainGames\Engine\getRandomNumber;
 
+use const BrainGames\Engine\NUMBER_OF_GAME_ROUNDS;
+
 function startGameBrainEven(): void
 {
-    startGame("brain-even", 'Answer "yes" if the number is even, otherwise answer "no".');
+    $themeOfGame = 'Answer "yes" if the number is even, otherwise answer "no".';
+    $questionsAnswers = getQuestionsAnswers();
+    startGame($themeOfGame, $questionsAnswers);
 }
 
-function getCorrectAnswerBrainEven(): string
+function getQuestionsAnswers(): array
 {
-    $randomNumber = getRandomNumber();
-    printLine("Question: $randomNumber");
-
-    if (isEven($randomNumber)) {
-        return "yes";
-    } else {
-        return "no";
+    $answersArray = [];
+    for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
+        $randomNumbers[] = getRandomNumber();
+        $correctAnswer = isEven($randomNumbers[$i]) ? "yes" : "no";
+        $answersArray[] = [
+            "Question" => "Question: $randomNumbers[$i]",
+            "Correct answer" => $correctAnswer
+        ];
     }
+
+    return $answersArray;
 }
 
 function isEven(int $number): bool
 {
-    if ($number % 2 == 0) {
-        return true;
-    } else {
-        return false;
-    }
+    return $number % 2 == 0;
 }

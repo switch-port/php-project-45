@@ -2,30 +2,39 @@
 
 namespace BrainGames\Games\Progression;
 
-use function BrainGames\Cli\printLine;
-use function BrainGames\Engine\getRandomNumber;
 use function BrainGames\Engine\startGame;
+use function BrainGames\Engine\getRandomNumber;
+
+use const BrainGames\Engine\NUMBER_OF_GAME_ROUNDS;
 
 function startGameBrainProgression(): void
 {
-    startGame("brain-progression", 'What number is missing in the progression?');
+    $themeOfGame = 'What number is missing in the progression?';
+    $questionsAnswers = getQuestionsAnswers();
+    startGame($themeOfGame, $questionsAnswers);
 }
 
-function getCorrectAnswerBrainProgression(): string
+function getQuestionsAnswers(): array
 {
-    $randomNumberOne = getRandomNumber();
-    $randomNumberTwo = getRandomNumber();
-    $arithmeticProgression = setArithmeticProgression($randomNumberOne, $randomNumberTwo);
-    $randomElementOfAP = array_rand($arithmeticProgression);
-    $correctAnswer = $arithmeticProgression[$randomElementOfAP];
-    $arithmeticProgression[$randomElementOfAP] = "..";
+    $answersArray = [];
+    for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
+        $randomNumbersOne[] = getRandomNumber();
+        $randomNumbersTwo[] = getRandomNumber();
+        $arithmeticProgression = getArithmeticProgression($randomNumbersOne[$i], $randomNumbersTwo[$i]);
+        $randomElementOfAP = array_rand($arithmeticProgression);
+        $correctAnswer = $arithmeticProgression[$randomElementOfAP];
+        $arithmeticProgression[$randomElementOfAP] = "..";
 
-    printLine("Question: " . implode(" ", $arithmeticProgression));
+        $answersArray[] = [
+            "Question" => "Question: " . implode(" ", $arithmeticProgression),
+            "Correct answer" => $correctAnswer
+        ];
+    }
 
-    return $correctAnswer;
+    return $answersArray;
 }
 
-function setArithmeticProgression(int $startNumber, int $progressionDifference): array
+function getArithmeticProgression(int $startNumber, int $progressionDifference): array
 {
     $arithmeticProgression = [$startNumber];
     for ($i = 1; $i < 10; $i++) {

@@ -2,25 +2,34 @@
 
 namespace BrainGames\Games\Calc;
 
-use function BrainGames\Cli\printLine;
-use function BrainGames\Engine\getRandomNumber;
 use function BrainGames\Engine\startGame;
+use function BrainGames\Engine\getRandomNumber;
+
+use const BrainGames\Engine\NUMBER_OF_GAME_ROUNDS;
 
 function startGameBrainCalc(): void
 {
-    startGame("brain-calc", 'What is the result of the expression?');
+    $themeOfGame = 'What is the result of the expression?';
+    $questionsAnswers = getQuestionsAnswers();
+    startGame($themeOfGame, $questionsAnswers);
 }
-
-function getCorrectAnswerBrainCalc(): string
+function getQuestionsAnswers(): array
 {
-    $randomNumberOne = getRandomNumber();
-    $randomNumberTwo = getRandomNumber();
-    $arrayOfSigns = ["+","-","*"];
-    $randomSign = array_rand($arrayOfSigns);
+    $answersArray = [];
+    for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
+        $randomNumbersOne[] = getRandomNumber();
+        $randomNumbersTwo[] = getRandomNumber();
+        $arrayOfSigns = ["+", "-", "*"];
+        $randomSign = array_rand($arrayOfSigns);
+        $correctAnswer = getMathResult($randomNumbersOne[$i], $arrayOfSigns[$randomSign], $randomNumbersTwo[$i]);
 
-    printLine("Question: $randomNumberOne $arrayOfSigns[$randomSign] $randomNumberTwo");
+        $answersArray[] = [
+            "Question" => "Question: $randomNumbersOne[$i] $arrayOfSigns[$randomSign] $randomNumbersTwo[$i]",
+            "Correct answer" => $correctAnswer
+        ];
+    }
 
-    return getMathResult($randomNumberOne, $arrayOfSigns[$randomSign], $randomNumberTwo);
+    return $answersArray;
 }
 
 function getMathResult(int $numOne, string $sign, int $numTwo): string

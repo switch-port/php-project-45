@@ -2,25 +2,33 @@
 
 namespace BrainGames\Games\Prime;
 
-use function BrainGames\Cli\printLine;
-use function BrainGames\Engine\getRandomNumber;
 use function BrainGames\Engine\startGame;
+use function BrainGames\Engine\getRandomNumber;
+
+use const BrainGames\Engine\NUMBER_OF_GAME_ROUNDS;
 
 function startGameBrainPrime(): void
 {
-    startGame("brain-prime", 'Answer "yes" if given number is prime. Otherwise answer "no".');
+    $themeOfGame = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+    $questionsAnswers = getQuestionsAnswers();
+    startGame($themeOfGame, $questionsAnswers);
 }
 
-function getCorrectAnswerBrainPrime(): string
-{
-    $randomNumber = getRandomNumber();
-    printLine("Question: $randomNumber");
 
-    if (isPrimeNumber($randomNumber)) {
-        return "yes";
-    } else {
-        return "no";
+function getQuestionsAnswers(): array
+{
+    $answersArray = [];
+    for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
+        $randomNumbers[] = getRandomNumber();
+        $correctAnswer = isPrimeNumber($randomNumbers[$i]) ? "yes" : "no";
+
+        $answersArray[] = [
+            "Question" => "Question: $randomNumbers[$i]",
+            "Correct answer" => $correctAnswer
+        ];
     }
+
+    return $answersArray;
 }
 
 function isPrimeNumber(int $number): bool
@@ -29,7 +37,7 @@ function isPrimeNumber(int $number): bool
         return false;
     }
 
-    for ($i = 2; $i < $number / 2; $i++) {
+    for ($i = 2; $i <= $number / 2; $i++) {
         if ($number % $i == 0) {
             return false;
         }
