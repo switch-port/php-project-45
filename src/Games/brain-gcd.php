@@ -24,6 +24,7 @@ function getQuestionsAnswers(): array
         $randomStartNumbers[] = getRandomNumber();
         $randomDifferenceNumbers[] = getRandomNumber();
         $correctAnswer = findGcd($randomStartNumbers[$i], $randomDifferenceNumbers[$i]);
+
         $answersArray[] = [
             "Question" => "Question: $randomStartNumbers[$i] $randomDifferenceNumbers[$i]",
             "Correct answer" => $correctAnswer

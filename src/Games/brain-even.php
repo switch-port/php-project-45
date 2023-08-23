@@ -21,10 +21,10 @@ function getQuestionsAnswers(): array
 
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
         $randomNumbers[] = getRandomNumber();
-        $correctAnswer = isEven($randomNumbers[$i]) ? "yes" : "no";
+
         $answersArray[] = [
             "Question" => "Question: $randomNumbers[$i]",
-            "Correct answer" => $correctAnswer
+            "Correct answer" => isEven($randomNumbers[$i]) ? "yes" : "no"
         ];
     }
 

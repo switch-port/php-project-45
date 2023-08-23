@@ -19,6 +19,7 @@ function getQuestionsAnswers(): array
     $randomNumbersOne = [];
     $randomNumbersTwo = [];
     $arrayOfSigns = ["+", "-", "*"];
+
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
         $randomNumbersOne[] = getRandomNumber();
         $randomNumbersTwo[] = getRandomNumber();
