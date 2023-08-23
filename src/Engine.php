@@ -9,7 +9,7 @@ const MIN_NUMBER = 1;
 const MAX_NUMBER = 99;
 const NUMBER_OF_GAME_ROUNDS = 3;
 
-function startGame(string $themeOfGame, $questionsAnswers): void
+function startGame(string $themeOfGame, array $questionsAnswers): void
 {
     $winCode = true;
 

@@ -17,6 +17,9 @@ function startGameBrainGcd(): void
 function getQuestionsAnswers(): array
 {
     $answersArray = [];
+    $randomStartNumbers = [];
+    $randomDifferenceNumbers = [];
+
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
         $randomStartNumbers[] = getRandomNumber();
         $randomDifferenceNumbers[] = getRandomNumber();

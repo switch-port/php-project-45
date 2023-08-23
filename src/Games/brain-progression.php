@@ -17,6 +17,9 @@ function startGameBrainProgression(): void
 function getQuestionsAnswers(): array
 {
     $answersArray = [];
+    $randomNumbersOne = [];
+    $randomNumbersTwo = [];
+
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
         $randomNumbersOne[] = getRandomNumber();
         $randomNumbersTwo[] = getRandomNumber();

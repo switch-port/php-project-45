@@ -18,6 +18,8 @@ function startGameBrainPrime(): void
 function getQuestionsAnswers(): array
 {
     $answersArray = [];
+    $randomNumbers = [];
+
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
         $randomNumbers[] = getRandomNumber();
         $correctAnswer = isPrimeNumber($randomNumbers[$i]) ? "yes" : "no";

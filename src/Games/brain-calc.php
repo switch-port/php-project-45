@@ -16,10 +16,12 @@ function startGameBrainCalc(): void
 function getQuestionsAnswers(): array
 {
     $answersArray = [];
+    $randomNumbersOne = [];
+    $randomNumbersTwo = [];
+    $arrayOfSigns = ["+", "-", "*"];
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
         $randomNumbersOne[] = getRandomNumber();
         $randomNumbersTwo[] = getRandomNumber();
-        $arrayOfSigns = ["+", "-", "*"];
         $randomSign = array_rand($arrayOfSigns);
         $correctAnswer = getMathResult($randomNumbersOne[$i], $arrayOfSigns[$randomSign], $randomNumbersTwo[$i]);
 
