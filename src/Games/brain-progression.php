@@ -3,13 +3,16 @@
 namespace BrainGames\Games\Progression;
 
 use function BrainGames\Engine\startGame;
-use function BrainGames\Engine\getRandomNumber;
 
+use const BrainGames\Engine\MAX_NUMBER;
+use const BrainGames\Engine\MIN_NUMBER;
 use const BrainGames\Engine\NUMBER_OF_GAME_ROUNDS;
+
+const THEME_OF_GAME = 'What number is missing in the progression?';
 
 function startGameBrainProgression(): void
 {
-    $themeOfGame = 'What number is missing in the progression?';
+    $themeOfGame = THEME_OF_GAME;
     $questionsAnswers = getQuestionsAnswers();
     startGame($themeOfGame, $questionsAnswers);
 }
@@ -17,13 +20,11 @@ function startGameBrainProgression(): void
 function getQuestionsAnswers(): array
 {
     $answersArray = [];
-    $randomNumbersOne = [];
-    $randomNumbersTwo = [];
 
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
-        $randomNumbersOne[] = getRandomNumber();
-        $randomNumbersTwo[] = getRandomNumber();
-        $arithmeticProgression = getArithmeticProgression($randomNumbersOne[$i], $randomNumbersTwo[$i]);
+        $randomNumberOne = rand(MIN_NUMBER, MAX_NUMBER);
+        $randomNumberTwo = rand(MIN_NUMBER, MAX_NUMBER);
+        $arithmeticProgression = getArithmeticProgression($randomNumberOne, $randomNumberTwo);
         $randomElementOfAP = array_rand($arithmeticProgression);
         $correctAnswer = $arithmeticProgression[$randomElementOfAP];
         $arithmeticProgression[$randomElementOfAP] = "..";

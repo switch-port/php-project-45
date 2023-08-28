@@ -3,29 +3,30 @@
 namespace BrainGames\Games\Prime;
 
 use function BrainGames\Engine\startGame;
-use function BrainGames\Engine\getRandomNumber;
 
+use const BrainGames\Engine\MAX_NUMBER;
+use const BrainGames\Engine\MIN_NUMBER;
 use const BrainGames\Engine\NUMBER_OF_GAME_ROUNDS;
+
+const THEME_OF_GAME = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 function startGameBrainPrime(): void
 {
-    $themeOfGame = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+    $themeOfGame = THEME_OF_GAME;
     $questionsAnswers = getQuestionsAnswers();
     startGame($themeOfGame, $questionsAnswers);
 }
 
-
 function getQuestionsAnswers(): array
 {
     $answersArray = [];
-    $randomPrimes = [];
 
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
-        $randomPrimes[] = getRandomNumber();
-        $correctAnswer = isPrimeNumber($randomPrimes[$i]) ? "yes" : "no";
+        $randomPrime = rand(MIN_NUMBER, MAX_NUMBER);
+        $correctAnswer = isPrimeNumber($randomPrime) ? "yes" : "no";
 
         $answersArray[] = [
-            "Question" => "Question: $randomPrimes[$i]",
+            "Question" => "Question: $randomPrime",
             "Correct answer" => $correctAnswer
         ];
     }

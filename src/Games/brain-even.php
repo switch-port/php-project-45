@@ -3,13 +3,16 @@
 namespace BrainGames\Games\Even;
 
 use function BrainGames\Engine\startGame;
-use function BrainGames\Engine\getRandomNumber;
 
+use const BrainGames\Engine\MAX_NUMBER;
+use const BrainGames\Engine\MIN_NUMBER;
 use const BrainGames\Engine\NUMBER_OF_GAME_ROUNDS;
+
+const THEME_OF_GAME = 'Answer "yes" if the number is even, otherwise answer "no".';
 
 function startGameBrainEven(): void
 {
-    $themeOfGame = 'Answer "yes" if the number is even, otherwise answer "no".';
+    $themeOfGame = THEME_OF_GAME;
     $questionsAnswers = getQuestionsAnswers();
     startGame($themeOfGame, $questionsAnswers);
 }
@@ -17,14 +20,13 @@ function startGameBrainEven(): void
 function getQuestionsAnswers(): array
 {
     $answersArray = [];
-    $randomNumbers = [];
 
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
-        $randomNumbers[] = getRandomNumber();
+        $randomNumber = rand(MIN_NUMBER, MAX_NUMBER);
 
         $answersArray[] = [
-            "Question" => "Question: $randomNumbers[$i]",
-            "Correct answer" => isEven($randomNumbers[$i]) ? "yes" : "no"
+            "Question" => "Question: $randomNumber",
+            "Correct answer" => isEven($randomNumber) ? "yes" : "no"
         ];
     }
 

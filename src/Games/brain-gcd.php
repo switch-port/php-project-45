@@ -3,13 +3,16 @@
 namespace BrainGames\Games\Gcd;
 
 use function BrainGames\Engine\startGame;
-use function BrainGames\Engine\getRandomNumber;
 
+use const BrainGames\Engine\MAX_NUMBER;
+use const BrainGames\Engine\MIN_NUMBER;
 use const BrainGames\Engine\NUMBER_OF_GAME_ROUNDS;
+
+const THEME_OF_GAME = 'Find the greatest common divisor of given numbers.';
 
 function startGameBrainGcd(): void
 {
-    $themeOfGame = 'Find the greatest common divisor of given numbers.';
+    $themeOfGame = THEME_OF_GAME;
     $questionsAnswers = getQuestionsAnswers();
     startGame($themeOfGame, $questionsAnswers);
 }
@@ -17,16 +20,14 @@ function startGameBrainGcd(): void
 function getQuestionsAnswers(): array
 {
     $answersArray = [];
-    $randomStartNumbers = [];
-    $randomDifferenceNumbers = [];
 
     for ($i = 0; $i < NUMBER_OF_GAME_ROUNDS; $i++) {
-        $randomStartNumbers[] = getRandomNumber();
-        $randomDifferenceNumbers[] = getRandomNumber();
-        $correctAnswer = findGcd($randomStartNumbers[$i], $randomDifferenceNumbers[$i]);
+        $randomStartNumber = rand(MIN_NUMBER, MAX_NUMBER);
+        $randomDifferenceNumber = rand(MIN_NUMBER, MAX_NUMBER);
+        $correctAnswer = findGcd($randomStartNumber, $randomDifferenceNumber);
 
         $answersArray[] = [
-            "Question" => "Question: $randomStartNumbers[$i] $randomDifferenceNumbers[$i]",
+            "Question" => "Question: $randomStartNumber $randomDifferenceNumber",
             "Correct answer" => $correctAnswer
         ];
     }
